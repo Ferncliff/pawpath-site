@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawPath - AI Support for Every Step of Your Pet's Journey</title>
+    <meta name="description" content="AI-powered follow-up calls that guide new pet parents through their first 30 days — while driving repeat visits to your business.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f97316;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f9fafb;
+            --border: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 100px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Services */
+        .services {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            font-size: 18px;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .service-card {
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .service-card .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .service-card .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+        
+        /* How it works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--bg-alt);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            color: var(--text-light);
+        }
+        
+        /* Demo section */
+        .demo {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .demo-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 60px 40px;
+            border-radius: 24px;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-box h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .demo-box p {
+            opacity: 0.9;
+            margin-bottom: 32px;
+            font-size: 18px;
+        }
+        
+        .demo-phone {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
+        
+        .demo-agents {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .demo-agent {
+            background: rgba(255,255,255,0.15);
+            padding: 16px 24px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .demo-agent strong {
+            display: block;
+            font-size: 18px;
+        }
+        
+        .demo-agent span {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        /* Stats */
+        .stats {
+            padding: 80px 0;
+            background: var(--bg-alt);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat h3 {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .stat p {
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-trust {
+            display: flex;
+            gap: 24px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-phone {
+                font-size: 28px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Paw<span>Path</span></a>
+            <a href="#contact" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI Support for <span>Every Step</span> of Your Pet's Journey</h1>
+            <p>AI-powered calls that guide new pet parents through their first 30 days — while driving repeat visits to your business.</p>
+            <div class="hero-cta">
+                <a href="#demo" class="btn btn-primary">Try a Demo Call</a>
+                <a href="#services" class="btn btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Solutions for Pet Businesses</h2>
+                <p>Choose the AI assistant that fits your needs</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🐕</div>
+                    <h3>Scout — Pet Stores</h3>
+                    <p>Follow-up calls for new pet parents. Answer first-day questions, recommend products, and drive return visits.</p>
+                    <div class="price">$99<span>/month</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Sage — Vet Practices</h3>
+                    <p>Post-appointment wellness calls, medication reminders, and compassionate memorial support for pet loss.</p>
+                    <div class="price">$199<span>/month</span></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🕊️</div>
+                    <h3>Grace — Pet Memorial</h3>
+                    <p>Gentle cremation reminders, grief support resources, and memorial planning assistance.</p>
+                    <div class="price">$149<span>/month</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How PawPath Works</h2>
+                <p>Set up in 15 minutes, start getting results immediately</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your System</h3>
+                    <p>Quick integration with your POS or CRM. Or simply upload a spreadsheet of new customers.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Calls Automatically</h3>
+                    <p>Scout, Sage, or Grace reaches out to your customers within 24 hours with personalized support.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Customers Feel Cared For</h3>
+                    <p>Questions answered, anxiety reduced, and a clear path back to your business for their next visit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <h3>67%</h3>
+                    <p>Increase in customer lifetime value</p>
+                </div>
+                <div class="stat">
+                    <h3>40%</h3>
+                    <p>Higher return visit rate</p>
+                </div>
+                <div class="stat">
+                    <h3>2+ hrs</h3>
+                    <p>Staff time saved daily</p>
+                </div>
+                <div class="stat">
+                    <h3>95%</h3>
+                    <p>Customer satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <div class="demo-box">
+                <h2>Try It Yourself</h2>
+                <p>Call one of our demo lines to experience PawPath AI in action</p>
+                <div class="demo-agents">
+                    <div class="demo-agent">
+                        <strong>🐕 Scout</strong>
+                        <span>Pet Store Support</span>
+                        <div style="margin-top: 8px; font-size: 20px;">(762) 224-0506</div>
+                    </div>
+                    <div class="demo-agent">
+                        <strong>🏥 Sage</strong>
+                        <span>Vet & Memorial</span>
+                        <div style="margin-top: 8px; font-size: 20px;">(762) 200-1616</div>
+                    </div>
+                    <div class="demo-agent">
+                        <strong>🕊️ Grace</strong>
+                        <span>Pet Memorial</span>
+                        <div style="margin-top: 8px; font-size: 20px;">(762) 994-2855</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="services" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ready to Get Started?</h2>
+                <p>30-day free trial • No credit card required • Cancel anytime</p>
+            </div>
+            <div style="text-align: center;">
+                <a href="mailto:hello@pawpath.ai" class="btn btn-primary" style="margin-right: 16px;">Contact Us</a>
+                <a href="tel:+17622240506" class="btn btn-secondary">Call (762) 224-0506</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="/" class="logo">Paw<span>Path</span></a>
+                <div class="footer-trust">
+                    <span>✓ HIPAA Compliant</span>
+                    <span>✓ GDPR/CCPA Compliant</span>
+                    <span>✓ 24/7 Support</span>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:hello@pawpath.ai">Contact</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; color: var(--text-light); font-size: 14px;">
+                Built by Ferncliff Partners — AI agents that add value to the human experience
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
